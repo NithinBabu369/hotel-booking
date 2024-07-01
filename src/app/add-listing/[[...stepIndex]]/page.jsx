@@ -13,9 +13,6 @@ import PageAddListing9 from "./PageAddListing9";
 const Page = ({
   params,
   searchParams,
-}: {
-  params: { stepIndex: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
   let ContentComponent = PageAddListing1;
   switch (Number(params.stepIndex)) {

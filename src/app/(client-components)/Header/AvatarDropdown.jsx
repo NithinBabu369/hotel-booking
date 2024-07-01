@@ -6,18 +6,19 @@ import Avatar from "@/shared/Avatar";
 import SwitchDarkMode2 from "@/shared/SwitchDarkMode2";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-interface Props {
-  className?: string;
-}
+// interface Props {
+//   className?: string;
+// }
 
 import { useSession } from "next-auth/react";
 
-export default function AvatarDropdown({ className = "" }: Props) {
+export default function AvatarDropdown({ className = "" }) {
 
   const { data: session} = useSession()
-  const email = session?.user?.email || '******@gmail.com';
-  const [ name, setName ] = useState(email)
+  
+  const [ name, setName ] = useState('')
 
+  console.log(session)
   useEffect(()=>{
     const fetchdata = async ()=>{
       if(session){ 
@@ -65,7 +66,7 @@ export default function AvatarDropdown({ className = "" }: Props) {
                       <Avatar sizeClass="w-12 h-12" />
 
                       <div className="flex-grow">
-                        <h4 className="font-semibold text-black">{name}</h4>
+                        <h4 className="font-semibold text-black">{name ? name : session?.user.email}</h4>
                         <p className="text-xs mt-0.5">Los Angeles, CA</p>
                       </div>
                     </div>

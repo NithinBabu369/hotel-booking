@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { LoadingOutlined } from "@ant-design/icons";
 
 
 
@@ -49,8 +50,9 @@ const PageSignUp = ({}) => {
 
       if (!passwordRegex.test(password)) {
         //setWarning(true);
-        return;
         setIsLoading(false)
+        return;
+        
       }
       const response = await fetch("/api/register", {
         cache: "no-store",
@@ -128,7 +130,7 @@ const PageSignUp = ({}) => {
               <Input type="password" className="mt-1" value={password}
                 onChange={(event) => setPassword(event.target.value)} />
             </label>
-            <ButtonPrimary type="submit" onClick={handleSubmit}>Continue</ButtonPrimary>
+            <ButtonPrimary type="submit" disabled={isLoading} onClick={handleSubmit}>{isLoading ? <LoadingOutlined/> : 'Continue'}</ButtonPrimary>
           </form>
 
           {/* ==== */}
